@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data noupdate="1">
+        <record id="email_template_sale_order_confirmation" model="mail.template">
+            <field name="name">Sale Order Confirmation</field>
+            <field name="model_id" ref="sale.model_sale_order"/>
+            <field name="subject">Sale Order Confirmation: ${object.name}</field>
+            <field name="email_from">${object.user_id.email or user.email}</field>
+            <field name="email_to">${object.partner_id.email}</field>
+            <field name="body_html">
+                <![CDATA[
+                <p>Dear ${object.partner_id.name},</p>
+                <p>Thank you for your order. Here are the details:</p>
+                <p><strong>Order Number:</strong> ${object.name}</p>
+                <p><strong>Order Date:</strong> ${object.date_order}</p>
+                <p><strong>Total Amount:</strong> ${object.amount_total}</p>
+                <p>Please find the attached sale order for more details.</p>
+                <p>Best regards,</p>
+                <p>${object.company_id.name}</p>
+                ]]>
+            </field>
+            <field name="model" ref="sale.model_sale_order"/>
+        </record>
+    </data>
+</odoo>
